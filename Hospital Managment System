@@ -1,0 +1,146 @@
+import java.util.Scanner;
+
+class Person {
+    protected int id;
+    protected String name;
+    protected int age;
+
+    public Person(int id, String name, int age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
+
+    public void displayPerson() {
+        System.out.println("ID      : " + id);
+        System.out.println("Name    : " + name);
+        System.out.println("Age     : " + age);
+    }
+}
+
+class Patient extends Person {
+    private String disease;
+
+    public Patient(int id, String name, int age, String disease) {
+        super(id, name, age);
+        this.disease = disease;
+    }
+
+    public void displayPatient() {
+        System.out.println("\n===== Patient Details =====");
+        displayPerson();
+        System.out.println("Disease : " + disease);
+    }
+}
+
+class Doctor extends Person {
+    private String specialization;
+
+    public Doctor(int id, String name, int age, String specialization) {
+        super(id, name, age);
+        this.specialization = specialization;
+    }
+
+    public void displayDoctor() {
+        System.out.println("\n===== Doctor Details =====");
+        displayPerson();
+        System.out.println("Specialization : " + specialization);
+    }
+}
+
+class Appointment {
+    private int appointmentId;
+    private String date;
+    private String time;
+
+    public Appointment(int appointmentId, String date, String time) {
+        this.appointmentId = appointmentId;
+        this.date = date;
+        this.time = time;
+    }
+
+    public void displayAppointment() {
+        System.out.println("\n===== Appointment =====");
+        System.out.println("Appointment ID : " + appointmentId);
+        System.out.println("Date           : " + date);
+        System.out.println("Time           : " + time);
+    }
+}
+
+class Bill {
+    private double doctorFee;
+    private double medicineFee;
+
+    public Bill(double doctorFee, double medicineFee) {
+        this.doctorFee = doctorFee;
+        this.medicineFee = medicineFee;
+    }
+
+    public void displayBill() {
+        double total = doctorFee + medicineFee;
+
+        System.out.println("\n===== Bill =====");
+        System.out.println("Doctor Fee    : " + doctorFee);
+        System.out.println("Medicine Fee  : " + medicineFee);
+        System.out.println("Total Bill    : " + total);
+    }
+}
+
+public class HospitalManagementSystem {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("=================================");
+        System.out.println(" HOSPITAL MANAGEMENT SYSTEM");
+        System.out.println("=================================");
+
+        // Patient Input for User 
+        System.out.print("\nEnter Patient ID: ");
+        int pid = sc.nextInt();
+        sc.nextLine(); // consume newline
+        System.out.print("Enter Patient Name: ");
+        String pname = sc.nextLine();
+        System.out.print("Enter Patient Age: ");
+        int page = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Enter Disease: ");
+        String disease = sc.nextLine();
+        Patient patient = new Patient(pid, pname, page, disease);
+
+        // Doctor Input  Give to User
+        System.out.print("\nEnter Doctor ID: ");
+        int did = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Enter Doctor Name: ");
+        String dname = sc.nextLine();
+        System.out.print("Enter Doctor Age: ");
+        int dage = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Enter Specialization: ");
+        String specialization = sc.nextLine();
+        Doctor doctor = new Doctor(did, dname, dage, specialization);
+
+        System.out.print("\nEnter Appointment ID: ");
+        int aid = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Enter Appointment Date (DD-MM-YYYY): ");
+        String date = sc.nextLine();
+        System.out.print("Enter Appointment Time (HH:MM AM/PM): ");
+        String time = sc.nextLine();
+        Appointment appointment = new Appointment(aid, date, time);
+
+        System.out.print("\nEnter Doctor Fee: ");
+        double doctorFee = sc.nextDouble();
+        System.out.print("Enter Medicine Fee: ");
+        double medicineFee = sc.nextDouble();
+        Bill bill = new Bill(doctorFee, medicineFee);
+
+        patient.displayPatient();
+        doctor.displayDoctor();
+        appointment.displayAppointment();
+        bill.displayBill();
+
+        System.out.println("\nThank You! Visit Again.");
+        sc.close();
+    }
+}
